@@ -1,0 +1,116 @@
+---
+openapi: 3.0.1
+info:
+  title: API V1
+  version: v1
+paths:
+  "/api/v1/products":
+    get:
+      summary: list products
+      tags:
+      - Products
+      responses:
+        '200':
+          description: Successful
+          content: {}
+    post:
+      summary: create product
+      tags:
+      - Product
+      parameters: []
+      responses:
+        '201':
+          description: Successful
+          content: {}
+        '422':
+          description: Unprocessable
+          content: {}
+  "/api/v1/products/{id}":
+    get:
+      summary: show products
+      tags:
+      - Products
+      parameters:
+      - name: id
+        in: path
+        description: id
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Successful
+          content: {}
+    put:
+      summary: update product
+      tags:
+      - Product
+      parameters:
+      - name: id
+        in: path
+        description: id
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Successful
+          content: {}
+        '404':
+          description: Not Found
+          content: {}
+definitions:
+  product_param:
+    title:
+      type: string
+    description:
+      type: text
+    price:
+      type: float
+    status:
+      type: strings
+  product:
+    type: object
+    properties:
+      id:
+        type: integer
+      created_at:
+        type: string
+      updated_at:
+        type: string
+      title:
+        type: string
+        example: Product Title
+      description:
+        type: text
+        example: Product Description 1
+      price:
+        type: float
+        example: '32.5'
+      status:
+        type: string
+        example: Available
+    required:
+    - title
+    - description
+    - price
+    - status
+pagination:
+  type: object
+  x-nullable: true
+  properties:
+    current_page:
+      type: integer
+      x-nullable: true
+    next_page:
+      type: integer
+      x-nullable: true
+    prev_page:
+      type: integer
+      x-nullable: true
+    total_pages:
+      type: integer
+      x-nullable: true
+    total_count:
+      type: integer
+      x-nullable: true

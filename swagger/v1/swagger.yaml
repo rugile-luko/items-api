@@ -1,0 +1,141 @@
+---
+openapi: 3.0.1
+info:
+  title: PRODUCTS API V1
+  version: v1
+paths:
+  "/api/v1/products":
+    get:
+      summary: list products
+      tags:
+      - Products
+      parameters:
+      - name: title
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: page
+        in: query
+        default: 1
+        required: false
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: Get list of products
+          content: {}
+    post:
+      summary: create product
+      tags:
+      - Products
+      parameters: []
+      responses:
+        '201':
+          description: Create a product
+          content: {}
+        '422':
+          description: Not creating product if fields not valid
+          content: {}
+      requestBody:
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/product"
+  "/api/v1/products/{id}":
+    get:
+      summary: show products
+      tags:
+      - Products
+      parameters:
+      - name: id
+        in: path
+        description: id
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Show one product
+          content: {}
+    put:
+      summary: update product
+      tags:
+      - Products
+      parameters:
+      - name: id
+        in: path
+        description: id
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Update a product
+          content: {}
+      requestBody:
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/product"
+    delete:
+      summary: delete product
+      tags:
+      - Products
+      parameters:
+      - name: id
+        in: path
+        description: id
+        required: true
+        schema:
+          type: string
+      responses:
+        '204':
+          description: Delete a product
+          content: {}
+components:
+  schemas:
+    product:
+      type: object
+      properties:
+        id:
+          type: integer
+        created_at:
+          type: string
+        updated_at:
+          type: string
+        title:
+          type: string
+          example: Product Title
+        description:
+          type: text
+          example: Product Description 1
+        price:
+          type: float
+          example: '32.5'
+        status:
+          type: string
+          example: Available
+        user_id:
+          type: string
+          example: '1'
+      required:
+      - title
+      - description
+      - price
+      - status
+    user:
+      type: object
+      properties:
+        id:
+          type: integer
+        created_at:
+          type: string
+        updated_at:
+          type: string
+        name:
+          type: string
+          example: User Name
+        email:
+          type: string
+          example: test@testing.com
